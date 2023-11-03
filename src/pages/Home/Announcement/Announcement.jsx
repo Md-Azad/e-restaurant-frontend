@@ -23,14 +23,3 @@ const Announcement = () => {
 };
 
 export default Announcement;
-// import img1 from "../../../assets/home/01.jpg"
-
-// const Announcement = () => {
-//     return (
-//         <div>
-
-//         </div>
-//     );
-// };
-
-// export default Announcement;
