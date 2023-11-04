@@ -9,7 +9,6 @@ const Menu = () => {
         <title>e-restaurant | Menu</title>
       </Helmet>
       <Cover coverImg={coverImg}></Cover>
-      
     </div>
   );
 };
