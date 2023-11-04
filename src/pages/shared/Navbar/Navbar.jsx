@@ -47,7 +47,7 @@ const Navbar = () => {
           <a className="btn btn-ghost normal-case text-xl">e-restaurant</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal hover:border-l-amber-600 px-1">
+          <ul className="menu menu-horizontal px-1">
             {navOptions}
           </ul>
         </div>
