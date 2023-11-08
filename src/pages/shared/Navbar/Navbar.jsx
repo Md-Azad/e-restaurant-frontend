@@ -5,14 +5,22 @@ const Navbar = () => {
     <>
       <li>
         <Link to="/">Home</Link>
-        
       </li>
 
       <li>
-        <a><Link to="/menu">Our Menu</Link></a>
+        <a>
+          <Link to="/menu">Our Menu</Link>
+        </a>
       </li>
       <li>
-      <a><Link to="/order/salad">Order Food</Link></a>
+        <a>
+          <Link to="/order/salad">Order Food</Link>
+        </a>
+      </li>
+      <li>
+        <a>
+          <Link to="/login">Login</Link>
+        </a>
       </li>
     </>
   );
@@ -47,9 +55,7 @@ const Navbar = () => {
           <a className="btn btn-ghost normal-case text-xl">e-restaurant</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navOptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Get started</a>
