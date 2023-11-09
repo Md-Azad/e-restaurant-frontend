@@ -1,15 +1,25 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const {createUser} = useContext(AuthContext);
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.email, data.password);
+
+    createUser(data.email,data.password)
+    .then(result =>{
+      const logUser = result.user;
+      console.log(logUser);
+    })
   };
 
   return (
@@ -93,7 +103,7 @@ const SignUp = () => {
                 {errors.password?.type === "pattern" && (
                   <span className="text-red-600">
                     password must contains a lowercase an Uppercase a special
-                    charecter and a number.{" "}
+                    charecter and a number.
                   </span>
                 )}
 
