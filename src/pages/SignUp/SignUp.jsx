@@ -44,7 +44,7 @@ const SignUp = () => {
                 placeholder="email"
                 className="input input-bordered"
               />
-              {errors.email && <span className="text-red-600"> Password is required</span>}
+              {errors.email && <span className="text-red-600"> Email is required</span>}
             </div>
             <div className="form-control">
               <label className="label">
@@ -52,13 +52,19 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
-                {...register("password",{ minLength: 6, maxLength: 20 })} 
+                {...register("password",{ required:"Email Address is required",
+                minLength: 6,
+                 maxLength: 20, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/})} 
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
-              />
               
-              {errors.password && <span className="text-red-600"> Password is required and must be at least 6 characters.</span>}
+              />
+              {errors.password && <span className="text-red-600">{errors.password.message}</span>}
+              {errors.password?.type ==='minLength' && <span className="text-red-600">password must be 6 charecters.</span>}
+              {errors.password?.type ==='maxLength' && <span className="text-red-600">password must be less than 20 charecters.</span>}
+              {errors.password?.type ==='pattern' 
+              && <span className="text-red-600">password must contains a lowercase an Uppercase a special charecter and a number. </span>}
               
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
@@ -67,7 +73,8 @@ const SignUp = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Sign Up</button>
+              <input className="btn btn-primary" type="submit" value="Sign Up" />
+              
             </div>
           </form>
         </div>
