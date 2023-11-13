@@ -12,13 +12,13 @@ const Dashboard = () => {
     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
   
   </div> 
-  <div className="drawer-side bg-[#D90]">
+  <div  className="drawer-side sidebar  bg-[#D1A054]">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 min-h-full  text-base-content">
       {/* Sidebar content here */}
-      <li><NavLink><FaHome></FaHome>User Home</NavLink></li>
-      <li><NavLink><FaCalendarAlt></FaCalendarAlt>Reservations</NavLink></li>
-      <li><NavLink><FaWallet></FaWallet>Payment History</NavLink></li>
+      <li><NavLink to='/dashboard/home'><FaHome></FaHome>User Home</NavLink></li>
+      <li><NavLink to='/dashboard/reservation'><FaCalendarAlt></FaCalendarAlt>Reservations</NavLink></li>
+      <li><NavLink to='/dashboard/history'><FaWallet></FaWallet>Payment History</NavLink></li>
       <li>
         <NavLink to='/dashboard/mycart'><FaShoppingCart></FaShoppingCart>My Cart</NavLink>
       </li>
