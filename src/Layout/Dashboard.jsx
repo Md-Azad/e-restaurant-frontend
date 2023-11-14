@@ -10,12 +10,14 @@ const Dashboard = () => {
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content flex flex-col items-center justify-center">
     {/* Page content here */}
+    
     <Outlet></Outlet>
-    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open</label>
   
   </div> 
   <div  className="drawer-side sidebar  bg-[#D1A054]">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label> 
+    <h1 className="font-semibold text-3xl text-center mt-8">E-Restaurant</h1>
     <ul className="menu p-4 w-80 min-h-full  text-base-content">
       {/* Sidebar content here */}
       <li><NavLink to='/dashboard/home'><FaHome></FaHome>User Home</NavLink></li>
