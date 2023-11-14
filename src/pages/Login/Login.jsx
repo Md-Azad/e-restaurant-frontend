@@ -7,6 +7,7 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disable, setDisable] = useState(true);
@@ -113,7 +114,9 @@ const Login = () => {
                 <Link to="/signup">New here? Create an account.</Link>{" "}
               </small>
             </p>
+            <SocialLogin></SocialLogin>
           </div>
+          
         </div>
       </div>
     </>
