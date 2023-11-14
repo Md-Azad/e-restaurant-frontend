@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
@@ -25,9 +26,32 @@ const SignUp = () => {
       console.log(logUser);
 
       updateUserProfile(data.name,data.photo)
+      
       .then(()=>{
-        console.log('user profile updated.')
-        reset();
+        const saveUser = {name: data.name, email:data.email}
+        console.log(data.name,data.email);
+        // console.log('user profile updated.')
+        fetch('http://localhost:5000/users',{
+          method: 'POST',
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify(saveUser)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.insertedId){
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        })
+        
         navigate('/');
         
       })
