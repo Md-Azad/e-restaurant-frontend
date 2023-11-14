@@ -1,9 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 
 
 const Allusers = () => {
+    const {data: users =[],refetch} = useQuery({
+        queryKey: ['users'],
+        queryFn : async () =>{
+            const res = await fetch("http://localhost:5000/users")
+            return res.json();
+        }
+        
+    })
+   
     return (
         <div>
-            <h1>All users have fun</h1>
+            {users.length}
         </div>
     );
 };
