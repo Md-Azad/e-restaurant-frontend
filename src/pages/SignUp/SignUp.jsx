@@ -29,7 +29,7 @@ const SignUp = () => {
       
       .then(()=>{
         const saveUser = {name: data.name, email:data.email}
-        console.log(data.name,data.email);
+        
         // console.log('user profile updated.')
         fetch('http://localhost:5000/users',{
           method: 'POST',
@@ -49,10 +49,11 @@ const SignUp = () => {
               showConfirmButton: false,
               timer: 1500
             });
+            navigate('/');
           }
         })
         
-        navigate('/');
+        // navigate('/');
         
       })
       .catch(error =>console.log(error));

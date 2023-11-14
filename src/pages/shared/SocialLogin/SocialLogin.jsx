@@ -15,7 +15,24 @@ const SocialLogin = () => {
         .then(result =>{
             const loggedUser = result.user;
             console.log(loggedUser);
+            
+            const saveUser = {name: loggedUser.displayName, email:loggedUser.email}
+        // console.log('user profile updated.')
+        fetch('http://localhost:5000/users',{
+          method: 'POST',
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify(saveUser)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.insertedId){
+            
             navigate(from, { replace: true });
+          }
+        })
+           
         })
     }
   return (
