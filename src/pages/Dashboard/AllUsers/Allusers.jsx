@@ -34,7 +34,7 @@ const Allusers = () => {
 
   }
 
-  const handleDelete = (user) => {};
+//   const handleDelete = (user) => {};
 
   return (
     <div className="w-full ml-8">
@@ -71,7 +71,7 @@ const Allusers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user)}
+                    // onClick={() => handleDelete(user)}
                     className="btn btn-ghost btn-lg bg-red-600 text-white"
                   >
                     <FaTrashAlt></FaTrashAlt>
