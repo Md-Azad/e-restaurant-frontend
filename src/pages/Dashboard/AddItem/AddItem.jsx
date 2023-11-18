@@ -1,16 +1,32 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const AddItem = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const {register,handleSubmit,formState: { errors },} = useForm();
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+  
   const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append('image',data.image[0]);
+    fetch(img_hosting_url,{
+      method: 'POST',
+      body:formData
+    })
+    .then(res=>res.json())
+    .then(imgResponse=>{
+      if(imgResponse.success){
+        const imgUrl = imgResponse.data.display_url;
+        const {name, price,recipe,category} = data;
+        const newItem = {name, price: parseFloat(price),recipe,category, image: imgUrl}
+        console.log(newItem);
+      }
+      // console.log(imgResponse);
+    })
     console.log(data);
   };
   console.log(errors);
+  // console.log("image",img_hosting_token);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full px-10">
       <SectionTitle
