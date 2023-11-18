@@ -1,11 +1,81 @@
-
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { useForm } from "react-hook-form";
 
 const AddItem = () => {
-    return (
-        <div>
-            <h3 className="text-4xl">Add an Item</h3>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  console.log(errors);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full px-10">
+      <SectionTitle
+        subHeading="What's New"
+        heading="Add an Item"
+      ></SectionTitle>
+      <div className="form-control w-full mb-4">
+        <label className="label">
+          <span className="label-text">Recipe Name*</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Recipe Name" {...register("name", {required: true, maxLength: 80})}
+          className="input input-bordered w-full "
+        />
+      </div>
+      <div className="flex space-x-10 mb-4">
+        <div className="form-control w-full ">
+          <label className="label">
+            <span className="label-text">Category*</span>
+          </label>
+          <select defaultValue="Pick One" className="select select-bordered" {...register("category", { required: true })}>
+            <option disabled >
+              Pick one
+            </option>
+            <option>Pizza</option>
+            <option>Salad</option>
+            <option>Drinks</option>
+            <option>Dessert</option>
+            <option>Soup</option>
+          </select>
         </div>
-    );
+        <div className="form-control w-full ">
+          <label className="label">
+            <span className="label-text">Price*</span>
+          </label>
+          <input
+            type="number"
+            placeholder="Price"{...register("price", {required: true, maxLength: 80})}
+            className="input input-bordered w-full "
+          />
+        </div>
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Recipe Details*</span>
+        </label>
+        <textarea
+          className="textarea textarea-bordered h-24"
+          placeholder="Recipe Details" {...register("recipe", {required: true, maxLength: 120})}
+        ></textarea>
+      </div>
+      <div className="mt-6">
+        <input
+          type="file"
+          className="file-input file-input-bordered file-input-secondary w-full max-w-xs " {...register("image", {required: true, maxLength: 80})}
+        />
+      </div>
+      <input
+        className="btn btn-sm btn-neutral mt-6"
+        type="submit"
+        value="Add Item"
+      />
+    </form>
+  );
 };
 
 export default AddItem;
