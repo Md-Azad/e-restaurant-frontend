@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
-const CheckoutForm = ({price}) => {
+const CheckoutForm = ({cart,price}) => {
   const stripe = useStripe();
   const elements = useElements();
   const {user} = useAuth();
@@ -14,7 +14,6 @@ const CheckoutForm = ({price}) => {
   const [transactionId, setTransactionId] = useState('');
 
   useEffect(()=>{
-    console.log("props price",price);
     axiosSecure.post('/create-payment-intent',{price})
     .then(res=>{
       console.log(res.data.clientSecret)
@@ -36,7 +35,7 @@ const CheckoutForm = ({price}) => {
       if (card == null) {
         return;
       }
-      const {error,paymentMethod} = await stripe.createPaymentMethod({
+      const {error} = await stripe.createPaymentMethod({
         type: 'card',
         card
       })
@@ -45,7 +44,7 @@ const CheckoutForm = ({price}) => {
         setCardError(error.message);
       }else{
         setCardError('');
-        console.log('payment method',paymentMethod);
+        // console.log('payment method',paymentMethod);
       }
       setProcessing(true);
       const {paymentIntent, error:confirmError} = await stripe.confirmCardPayment(
@@ -68,8 +67,24 @@ const CheckoutForm = ({price}) => {
       setProcessing(false);
       if(paymentIntent.status === 'succeeded'){
         setTransactionId(paymentIntent.id)
-        const transactionId = paymentIntent.id;
-        // TODO: next steps
+        // const transactionId = paymentIntent.id;
+        // save payment information to the server.
+
+        const payment = {
+          email: user?.email,
+          transactionId: paymentIntent.id,
+          price,
+          quantity: cart.length,
+          items: cart.map(item=>item._id),
+          itemName: cart.map(item=>item.name)
+        }
+        axiosSecure.post('/payment',payment)
+        .then(res=>{
+          console.log(res.data);
+          if(res.data.insertedId){
+            console.log('')
+          }
+        })
       }
   }
   return (
