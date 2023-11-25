@@ -3,10 +3,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   const handleLogOut = () => {
     logOut()
@@ -31,15 +33,17 @@ const Navbar = () => {
       </li>
       <li>
         <a>
-          <Link to="/secret">Secret</Link>
+          {
+            isAdmin? <Link to='/dashboard/adminhome'>Dashboard</Link> :<Link to='/dashboard/userhome'>Dashboard</Link>
+          }
         </a>
       </li>
       <li>
         <Link to="/dashboard">
-          <button className="btn">
+          
             <FaShoppingCart></FaShoppingCart>
             <div className="badge badge-secondary">+{cart?.length}</div>
-          </button>
+          
         </Link>
       </li>
 
