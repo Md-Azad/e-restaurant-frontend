@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
             console.log("Current user",currentUser);
             // get and set jwt token
             if(currentUser){
-                axios.post('http://localhost:5000/jwt',{email:currentUser.email})
+                axios.post('https://e-restaurant.onrender.com/jwt',{email:currentUser.email})
                 .then(data =>{
                     console.log("data from Axios",data.data.token)
                     localStorage.setItem('access-token',data.data.token)
